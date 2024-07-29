@@ -29,10 +29,10 @@ public class Move : MonoBehaviour
         Controller.Players.Add(this);
     }
 
-     private void OnDisable(){
+    private void OnDisable(){
         Controller.Players.Remove(this);
     }
-     public void MoveToPosition(Vector2 position){
+    public void MoveToPosition(Vector2 position){
         Vector2 clampedPlayer = new(Mathf.Clamp(position.x, playerBoundary.LeftLimit, playerBoundary.RightLimit),
                                  Mathf.Clamp(position.y, playerBoundary.DownLimit, playerBoundary.UpLimit));
 
@@ -42,40 +42,3 @@ public class Move : MonoBehaviour
         PlayerRb.position = startingPosition; 
     }
 }
-
-//ManoloCode
-// [SerializeField] private LayerMask Player;
-// private Transform jugador;
-
-//Moving to touch
-// bool canMove;
-// void Update()
-// {
-
-//     if (Input.GetMouseButtonDown(0)){
-//         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-//         if(PlayerCollider.OverlapPoint(mousePosition)) canMove = true;
-            
-//         else canMove = false;
-
-
-//         if(canMove) PlayerRb.MovePosition(mousePosition);
-//         else canMove = false;
-
-//     }
-
-//     if (Input.GetMouseButtonUp(0)) canMove = false;
-// }
-
-// private void OnMouseDrag()
-// {
-//     Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-//     if (canMove){ 
-//         Vector2 clampedPlayer = new Vector2(Mathf.Clamp(mousePosition.x, playerBoundary.LeftLimit, playerBoundary.RightLimit),
-//         Mathf.Clamp(mousePosition.y, playerBoundary.DownLimit, playerBoundary.UpLimit));
-
-//         PlayerRb.MovePosition(clampedPlayer);
-//     }
-// }

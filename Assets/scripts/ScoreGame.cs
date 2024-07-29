@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class ScoreGame : MonoBehaviour
 {
+    
     public enum Score
     {
         ScoreAi, ScorePlayer

@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainMenu.unity
-    guid: 48038123c13d32f46be48dcb90c6acd8
-  - enabled: 1
     path: Assets/Scenes/GameVsPlayer.unity
     guid: 149229e8d101cc54e820ec323a930380
   m_configObjects:
+    com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: 2bba749495d2c7446b6ac4a2be26892f, type: 2}
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 38c9f7599dd9ff54ea7063afca88e5f8, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 15523dc74d406a445ace65b430a1241b, type: 2}
     com.unity.input.settings: {fileID: 11400000, guid: d3a2328d03c4f7f45838c17641f17576, type: 2}

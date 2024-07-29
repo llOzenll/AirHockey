@@ -9,6 +9,12 @@ public class DiskScript : MonoBehaviour
     public static bool WasGoal {get; private set;}
     private Rigidbody2D DiskRb;
 
+    public Move Disk;
+    public Move Disk1;
+    public MoveAi DiskAI;
+
+    public GameObject GoalBlue;
+    public GameObject GoalRed;
     public float maxSpeddDisk;
 
     void Start(){
@@ -16,23 +22,52 @@ public class DiskScript : MonoBehaviour
         WasGoal = false;
     }
 
-    private void OnTriggerEnter2D(Collider2D other){
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        StartCoroutine(Trigger(other));
+    }
+
+    IEnumerator Trigger(Collider2D other){
         if(!WasGoal){
-            if(other.tag == "GoalAi"){
+            if(other.CompareTag("GoalAi")){
                 ScoreInstance.Increment(ScoreGame.Score.ScorePlayer);
                 WasGoal =true;
-                StartCoroutine(ResetDiskPosition(false));
+                GoalBlue.SetActive(true);
+                Time.timeScale = 0;
+
+                yield return new WaitForSecondsRealtime(1f);
+
+                Time.timeScale = 1;
+                Disk.ResetPosition();
+                Disk1.ResetPosition();
+                ResetDiskPosition(false);
+
+                if (DiskAI.enabled == true)  DiskAI.ResetPosition();
+                    
+                GoalBlue.SetActive(false);
+
             }
-            else if(other.tag == "GoalPlayer"){
+            else if(other.CompareTag("GoalPlayer")){
                 ScoreInstance.Increment(ScoreGame.Score.ScoreAi);
                 WasGoal =true;
-                StartCoroutine(ResetDiskPosition(true));
+                GoalRed.SetActive(true);
+                Time.timeScale = 0;
+
+                yield return new WaitForSecondsRealtime(1f);
+
+                Time.timeScale = 1;
+                Disk.ResetPosition();
+                Disk1.ResetPosition();
+                ResetDiskPosition(true);
+
+                if (DiskAI.enabled == true) DiskAI.ResetPosition();
+                    
+                GoalRed.SetActive(false);
             }
         }
     }
 
-    private IEnumerator ResetDiskPosition(bool AiScored){
-        yield return new WaitForSecondsRealtime(1);
+    private void ResetDiskPosition(bool AiScored){
         WasGoal = false;
         DiskRb.velocity = DiskRb.position = new Vector2(0,0);
 
